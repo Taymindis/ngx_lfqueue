@@ -22,6 +22,24 @@ ngx_lfqueue is zero downtime nginx reloadable, data is on share memory, data is 
 Usage
 =======
 ### 1. Setup your lfqueue
+
+#### There are 4 commands in this module
+
+ngx_lfqueue_memory_allocate - main config scope (1 argument)
+allocate the suitable share memory size for all the queue.
+
+ngx_lfqueue_name - main config scope (1 argument)
+init or reload the queue with a queue name, if the queue name existed on backup data, it will load from backup data.
+
+ngx_lfqueue_backup - main config scope (2 arguments)
+backup the data with special unique split key and file path, if file path not mentioned, it will stored under same directory of nginx config file.
+
+ngx_lfqueue_target - location config scope (1 argument)
+target which queue name to process data enqueue or dequeue.
+POST METHOD - Enqueue
+GET METHOD - Dequeue
+HEAD METHOD - Get the queue Info
+
 ```nginx
 # nginx.conf
 http {
