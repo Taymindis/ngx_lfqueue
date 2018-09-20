@@ -1,0 +1,40 @@
+ngx_addon_name=ngx_http_lfqueue_module
+
+HTTP_LFQUEUE_SRCS="$ngx_addon_dir/src/ngx_http_lfqueue_module.c \
+"
+
+HTTP_LFQUEUE_DEPS="$NGX_ADDON_DEPS \
+"
+
+
+ngx_feature="ngx_http_lfqueue"
+ngx_feature_name="NGX_HAVE_LFQUEUE_HEADERS"
+ngx_feature_run=no
+ngx_feature_incs="#include <lfsaq/lfqueue.h>"
+ngx_feature_path=
+ngx_feature_libs="-llfqueue"
+# ngx_feature_exit_if_not_found=yes
+ngx_feature_test="lfqueue_t q; lfqueue_init(&q);"
+. auto/feature
+
+if [ $ngx_found != yes ]; then
+echo "lfqueue library not found, this module depends on lfqueue. install library via https://github.com/Taymindis/lfqueue "
+echo
+exit 1
+fi
+
+if test -n "$ngx_module_link"; then
+    ngx_module_type=HTTP
+    ngx_module_name=$ngx_addon_name
+    ngx_module_deps="$HTTP_LFQUEUE_DEPS"
+    ngx_module_srcs="$HTTP_LFQUEUE_SRCS"
+    #ngx_module_libs=" -rdynamic -ldl -lpthread -lpcre -Wl,-E"
+    ngx_module_libs="-ldl -lm -lpthread -lpcre -llfqueue"
+    #ngx_module_libs="-lunwind-coredump -lunwind-generic -lunwind-ptrace -lunwind"
+    
+    . auto/module
+else
+  HTTP_MODULES="$HTTP_MODULES ngx_http_lfqueue_module"
+  NGX_ADDON_SRCS="$NGX_ADDON_SRCS $HTTP_LFQUEUE_SRCS"
+  NGX_ADDON_DEPS="$NGX_ADDON_DEPS $HTTP_LFQUEUE_DEPS"
+fi
