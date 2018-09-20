@@ -29,7 +29,7 @@ http {
     ngx_lfqueue_name q1;
     ngx_lfqueue_name q2;
     ngx_lfqueue_name q3;
-    ngx_lfqueue_backup "|@|" /tmp/ngx_lfqueue_data.txt;	
+    ngx_lfqueue_backup |@| /tmp/ngx_lfqueue_data.txt;	
     ...
 }
 ```
