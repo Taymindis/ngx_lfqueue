@@ -150,3 +150,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 [Back to TOC](#table-of-contents)
+
+
+
+## You may also like nginx lock free stack 
+
+[ngx_lfstack](https://github.com/Taymindis/ngx_lfstack)
