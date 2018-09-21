@@ -46,7 +46,7 @@ server {
 
 
    location /processQueueWithArgVariable {
-       ngx_lfqueue_target arg_targetQueue;
+       ngx_lfqueue_target $arg_target;
    }
 }
 ```
